@@ -111,6 +111,27 @@ export async function updateBar(
   redirect(`/bars/${id}`);
 }
 
+// Stars or unstars one of your bars. The database only lets you star your
+// own bars, and starring twice is ignored.
+export async function setStarred(barId: number, starred: boolean) {
+  const user = await requireUser();
+  const supabase = await createClient();
+  const { error } = starred
+    ? await supabase
+        .from("stars")
+        .upsert(
+          { user_id: user.id, bar_id: barId },
+          { onConflict: "user_id,bar_id", ignoreDuplicates: true },
+        )
+    : await supabase
+        .from("stars")
+        .delete()
+        .eq("user_id", user.id)
+        .eq("bar_id", barId);
+  if (error) throw error;
+  revalidatePath("/", "layout");
+}
+
 export async function deleteBar(id: number) {
   const user = await requireUser();
   const supabase = await createClient();

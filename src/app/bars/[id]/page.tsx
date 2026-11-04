@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { getBar, parseBarId } from "@/lib/bars";
 import { DeleteBarButton } from "@/app/bars/delete-bar-button";
+import { StarButton } from "@/app/bars/star-button";
 import { Stars } from "@/app/bars/stars";
 
 export default function BarPage({ params }: PageProps<"/bars/[id]">) {
@@ -31,11 +32,19 @@ async function BarDetail({ id }: { id: string }) {
 
   return (
     <article className="stack">
-      <div>
-        <h1>{bar.name}</h1>
-        <p className="muted">
-          {bar.neighborhood.name} · {bar.type}
-        </p>
+      <div className="page-heading">
+        <div>
+          <h1>{bar.name}</h1>
+          <p className="muted">
+            {bar.neighborhood.name} · {bar.type}
+          </p>
+        </div>
+        <StarButton
+          barId={bar.id}
+          barName={bar.name}
+          starred={bar.starred}
+          variant="full"
+        />
       </div>
 
       <dl className="details card">
