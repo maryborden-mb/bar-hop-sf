@@ -2,7 +2,14 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState, useTransition } from "react";
-import { BAR_TYPES, type BarType, type Neighborhood } from "@/lib/types";
+import {
+  BAR_TYPES,
+  GOOD_FOR_LABELS,
+  GOOD_FOR_TAGS,
+  type BarType,
+  type GoodForTag,
+  type Neighborhood,
+} from "@/lib/types";
 import {
   DEFAULT_FILTERS,
   SORT_OPTIONS,
@@ -33,6 +40,13 @@ export function JournalFilterBar({ filters, neighborhoods }: Props) {
     startTransition(() => {
       router.replace(query ? `/journal?${query}` : "/journal", { scroll: false });
     });
+  }
+
+  function toggleTag(tag: GoodForTag) {
+    const tags = current.tags.includes(tag)
+      ? current.tags.filter((t) => t !== tag)
+      : GOOD_FOR_TAGS.filter((t) => t === tag || current.tags.includes(t));
+    apply({ ...current, tags });
   }
 
   // Wait until typing pauses before searching.
@@ -102,6 +116,21 @@ export function JournalFilterBar({ filters, neighborhoods }: Props) {
             ))}
           </select>
         </label>
+      </div>
+
+      <div className="tag-filter" role="group" aria-label="Good for">
+        <span className="tag-filter-label">Good for</span>
+        {GOOD_FOR_TAGS.map((tag) => (
+          <button
+            key={tag}
+            type="button"
+            className="tag-toggle"
+            aria-pressed={current.tags.includes(tag)}
+            onClick={() => toggleTag(tag)}
+          >
+            {GOOD_FOR_LABELS[tag]}
+          </button>
+        ))}
       </div>
 
       {hasActiveFilters(current) && (

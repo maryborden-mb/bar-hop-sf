@@ -45,6 +45,7 @@ function readValues(formData: FormData): BarFormValues {
     rating: text("rating"),
     would_return: text("would_return"),
     has_outdoor_seating: formData.get("has_outdoor_seating") === "on",
+    good_for: formData.getAll("good_for").map(String),
     vibe: text("vibe"),
     notes: text("notes"),
   };
@@ -63,6 +64,7 @@ function toRow(values: BarFormValues) {
     would_return:
       visited && values.would_return ? values.would_return === "yes" : null,
     has_outdoor_seating: values.has_outdoor_seating,
+    good_for: [...new Set(values.good_for)],
     vibe: values.vibe || null,
     notes: values.notes || null,
   };

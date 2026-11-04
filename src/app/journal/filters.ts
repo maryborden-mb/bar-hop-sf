@@ -1,4 +1,10 @@
-import { BAR_TYPES, type Bar, type BarType } from "@/lib/types";
+import {
+  BAR_TYPES,
+  GOOD_FOR_TAGS,
+  type Bar,
+  type BarType,
+  type GoodForTag,
+} from "@/lib/types";
 
 export const SORT_OPTIONS = [
   { value: "newest", label: "Newest" },
@@ -11,6 +17,7 @@ export type JournalFilters = {
   q: string; // search text for name or notes
   neighborhood: number | null; // neighborhood id
   type: BarType | null;
+  tags: GoodForTag[]; // a bar must have every one of these
   sort: SortOption;
 };
 
@@ -18,6 +25,7 @@ export const DEFAULT_FILTERS: JournalFilters = {
   q: "",
   neighborhood: null,
   type: null,
+  tags: [],
   sort: "newest",
 };
 
@@ -27,16 +35,18 @@ function first(value: string | string[] | undefined): string {
   return (Array.isArray(value) ? value[0] : value)?.trim() ?? "";
 }
 
-// Reads filters from the URL (?q=…&neighborhood=…&type=…&sort=…). Anything
-// missing or unrecognized falls back to the default.
+// Reads filters from the URL (?q=…&neighborhood=…&type=…&tags=…&sort=…).
+// Anything missing or unrecognized falls back to the default.
 export function parseFilters(params: SearchParams): JournalFilters {
   const neighborhood = Number(first(params.neighborhood));
   const type = first(params.type);
+  const tags = first(params.tags).split(",");
   const sort = first(params.sort);
   return {
     q: first(params.q),
     neighborhood: Number.isInteger(neighborhood) && neighborhood > 0 ? neighborhood : null,
     type: (BAR_TYPES as readonly string[]).includes(type) ? (type as BarType) : null,
+    tags: GOOD_FOR_TAGS.filter((tag) => tags.includes(tag)),
     sort: SORT_OPTIONS.some((o) => o.value === sort) ? (sort as SortOption) : "newest",
   };
 }
@@ -47,12 +57,15 @@ export function filtersToQuery(filters: JournalFilters): string {
   if (filters.q) params.set("q", filters.q);
   if (filters.neighborhood) params.set("neighborhood", String(filters.neighborhood));
   if (filters.type) params.set("type", filters.type);
+  if (filters.tags.length) params.set("tags", filters.tags.join(","));
   if (filters.sort !== "newest") params.set("sort", filters.sort);
   return params.toString();
 }
 
 export function hasActiveFilters(filters: JournalFilters): boolean {
-  return Boolean(filters.q || filters.neighborhood || filters.type);
+  return Boolean(
+    filters.q || filters.neighborhood || filters.type || filters.tags.length,
+  );
 }
 
 const byName = (a: Bar, b: Bar) =>
@@ -80,7 +93,8 @@ export function applyFilters<T extends Bar>(bars: T[], filters: JournalFilters):
           bar.name.toLowerCase().includes(q) ||
           (bar.notes ?? "").toLowerCase().includes(q)) &&
         (!filters.neighborhood || bar.neighborhood_id === filters.neighborhood) &&
-        (!filters.type || bar.type === filters.type),
+        (!filters.type || bar.type === filters.type) &&
+        filters.tags.every((tag) => bar.good_for.includes(tag)),
     )
     .sort(SORTERS[filters.sort]);
 }

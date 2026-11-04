@@ -6,6 +6,7 @@ import { DeleteBarButton } from "@/app/bars/delete-bar-button";
 import { MarkVisitedForm } from "@/app/bars/mark-visited-form";
 import { StarButton } from "@/app/bars/star-button";
 import { Stars } from "@/app/bars/stars";
+import { TagList } from "@/app/bars/tag-list";
 
 export default function BarPage({ params }: PageProps<"/bars/[id]">) {
   return (
@@ -75,6 +76,14 @@ async function BarDetail({ id }: { id: string }) {
           <dt>Outdoor seating</dt>
           <dd>{bar.has_outdoor_seating ? "Yes" : "No"}</dd>
         </div>
+        {bar.good_for.length > 0 && (
+          <div>
+            <dt>Good for</dt>
+            <dd>
+              <TagList tags={bar.good_for} />
+            </dd>
+          </div>
+        )}
         {bar.vibe && (
           <div>
             <dt>Vibe</dt>
