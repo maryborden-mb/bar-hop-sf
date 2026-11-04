@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* Vintage SF bar-journal palette: burgundy, cream, muted olive. */
+/* Vintage SF bar-journal palette: burgundy, gold, cream, and deep brass. */
 :root {
   --background: #f7f0e3;
   --surface: #fffaf0;
@@ -8,9 +8,16 @@
   --muted: #6e5f55;
   --burgundy: #7a1f2b;
   --burgundy-dark: #5c1520;
-  --olive: #6b6b3a;
+  --brass: #7d5a1c;
   --border: #e3d6bf;
   --error: #a8261c;
+  --gold: #d4a94f;
+
+  /* Cocktail-bar wallpaper: gold art-deco fans on burgundy. Pages sit
+     on a cream "menu card" on top of it, so text stays easy to read. */
+  --wallpaper-color: var(--burgundy);
+  --wallpaper-pattern: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100' fill='none'><path d='M0 50L-50.0 50.0A50 50 0 0 1 -48.7 38.9Z' fill='%23fff' fill-opacity='.035'/><path d='M0 50L-45.0 28.3A50 50 0 0 1 -39.1 18.8Z' fill='%23fff' fill-opacity='.035'/><path d='M0 50L-31.2 10.9A50 50 0 0 1 -21.7 5.0Z' fill='%23fff' fill-opacity='.035'/><path d='M0 50L-11.1 1.3A50 50 0 0 1 -0.0 0.0Z' fill='%23fff' fill-opacity='.035'/><path d='M0 50L11.1 1.3A50 50 0 0 1 21.7 5.0Z' fill='%23fff' fill-opacity='.035'/><path d='M0 50L31.2 10.9A50 50 0 0 1 39.1 18.8Z' fill='%23fff' fill-opacity='.035'/><path d='M0 50L45.0 28.3A50 50 0 0 1 48.7 38.9Z' fill='%23fff' fill-opacity='.035'/><path d='M0 50L-48.7 38.9M0 50L-45.0 28.3M0 50L-39.1 18.8M0 50L-31.2 10.9M0 50L-21.7 5.0M0 50L-11.1 1.3M0 50L-0.0 0.0M0 50L11.1 1.3M0 50L21.7 5.0M0 50L31.2 10.9M0 50L39.1 18.8M0 50L45.0 28.3M0 50L48.7 38.9' stroke='%23d4a94f' stroke-width='.7'/><path d='M-50 50A50 50 0 0 1 50 50' stroke='%23d4a94f' stroke-width='1.6'/><path d='M-3.2 44L3.2 44L0 50Z' fill='%23d4a94f'/><path d='M100 50L50.0 50.0A50 50 0 0 1 51.3 38.9Z' fill='%23fff' fill-opacity='.035'/><path d='M100 50L55.0 28.3A50 50 0 0 1 60.9 18.8Z' fill='%23fff' fill-opacity='.035'/><path d='M100 50L68.8 10.9A50 50 0 0 1 78.3 5.0Z' fill='%23fff' fill-opacity='.035'/><path d='M100 50L88.9 1.3A50 50 0 0 1 100.0 0.0Z' fill='%23fff' fill-opacity='.035'/><path d='M100 50L111.1 1.3A50 50 0 0 1 121.7 5.0Z' fill='%23fff' fill-opacity='.035'/><path d='M100 50L131.2 10.9A50 50 0 0 1 139.1 18.8Z' fill='%23fff' fill-opacity='.035'/><path d='M100 50L145.0 28.3A50 50 0 0 1 148.7 38.9Z' fill='%23fff' fill-opacity='.035'/><path d='M100 50L51.3 38.9M100 50L55.0 28.3M100 50L60.9 18.8M100 50L68.8 10.9M100 50L78.3 5.0M100 50L88.9 1.3M100 50L100.0 0.0M100 50L111.1 1.3M100 50L121.7 5.0M100 50L131.2 10.9M100 50L139.1 18.8M100 50L145.0 28.3M100 50L148.7 38.9' stroke='%23d4a94f' stroke-width='.7'/><path d='M50 50A50 50 0 0 1 150 50' stroke='%23d4a94f' stroke-width='1.6'/><path d='M96.8 44L103.2 44L100 50Z' fill='%23d4a94f'/><path d='M50 100L0.0 100.0A50 50 0 0 1 1.3 88.9Z' fill='%23fff' fill-opacity='.035'/><path d='M50 100L5.0 78.3A50 50 0 0 1 10.9 68.8Z' fill='%23fff' fill-opacity='.035'/><path d='M50 100L18.8 60.9A50 50 0 0 1 28.3 55.0Z' fill='%23fff' fill-opacity='.035'/><path d='M50 100L38.9 51.3A50 50 0 0 1 50.0 50.0Z' fill='%23fff' fill-opacity='.035'/><path d='M50 100L61.1 51.3A50 50 0 0 1 71.7 55.0Z' fill='%23fff' fill-opacity='.035'/><path d='M50 100L81.2 60.9A50 50 0 0 1 89.1 68.8Z' fill='%23fff' fill-opacity='.035'/><path d='M50 100L95.0 78.3A50 50 0 0 1 98.7 88.9Z' fill='%23fff' fill-opacity='.035'/><path d='M50 100L1.3 88.9M50 100L5.0 78.3M50 100L10.9 68.8M50 100L18.8 60.9M50 100L28.3 55.0M50 100L38.9 51.3M50 100L50.0 50.0M50 100L61.1 51.3M50 100L71.7 55.0M50 100L81.2 60.9M50 100L89.1 68.8M50 100L95.0 78.3M50 100L98.7 88.9' stroke='%23d4a94f' stroke-width='.7'/><path d='M0 100A50 50 0 0 1 100 100' stroke='%23d4a94f' stroke-width='1.6'/><path d='M46.8 94L53.2 94L50 100Z' fill='%23d4a94f'/><path d='M0 50V100M100 50V100M50 0V50' stroke='%23d4a94f'/></svg>");
+  --wallpaper-size: 200px;
 }
 
 @theme inline {
@@ -21,13 +28,17 @@
 }
 
 body {
-  background: var(--background);
+  background-color: var(--wallpaper-color);
+  background-image: var(--wallpaper-pattern);
+  background-size: var(--wallpaper-size);
   color: var(--foreground);
   font-family: var(--font-body), system-ui, sans-serif;
+  font-weight: 500;
 }
 
 h1 {
   font-family: var(--font-display), Georgia, serif;
+  font-weight: 800;
   font-size: 2rem;
   line-height: 1.15;
   color: var(--burgundy);
@@ -45,14 +56,39 @@ a {
   justify-content: space-between;
   gap: 1rem;
   padding: 1rem 1.25rem;
-  border-bottom: 1px solid var(--border);
-  background: var(--surface);
+  /* A dark burgundy ribbon with a gold edge, to match the wallpaper. */
+  background: #3a0c14;
+  border-bottom: 2px solid var(--gold);
+}
+
+.site-header .brand {
+  color: var(--gold);
+}
+
+.site-header .nav a,
+.site-header .link-button {
+  color: var(--surface);
+}
+
+.site-header .nav a:hover,
+.site-header .link-button:hover {
+  color: var(--gold);
+}
+
+.site-header .nav a.button {
+  background: var(--gold);
+  color: #3a0c14;
+}
+
+.site-header .nav a.button:hover {
+  background: #e3bd68;
+  color: #3a0c14;
 }
 
 .brand {
   font-family: var(--font-display), Georgia, serif;
   font-size: 1.35rem;
-  font-weight: 600;
+  font-weight: 800;
   text-decoration: none;
 }
 
@@ -67,11 +103,23 @@ a {
   gap: 0.5rem 1rem;
 }
 
+/* Each page is a cream "menu card" on the wallpaper. */
 .page {
-  width: 100%;
+  width: calc(100% - 2rem);
   max-width: 48rem;
-  margin: 0 auto;
-  padding: 2.5rem 1.25rem;
+  margin: 2rem auto;
+  padding: 2.25rem 1.5rem;
+  background: var(--background);
+  border-radius: 1rem;
+  box-shadow: 0 10px 40px rgb(20 4 8 / 0.35);
+}
+
+@media (max-width: 480px) {
+  .page {
+    width: calc(100% - 1.5rem);
+    margin: 1rem auto;
+    padding: 1.75rem 1.1rem;
+  }
 }
 
 .page.narrow {
@@ -99,11 +147,11 @@ a {
 }
 
 .eyebrow {
-  color: var(--olive);
+  color: var(--brass);
   text-transform: uppercase;
   letter-spacing: 0.12em;
   font-size: 0.8rem;
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 0.75rem;
 }
 
@@ -136,7 +184,7 @@ a {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .field input,
@@ -152,7 +200,7 @@ a {
 .field input:focus,
 .field select:focus,
 .field textarea:focus {
-  outline: 2px solid var(--olive);
+  outline: 2px solid var(--brass);
   outline-offset: 1px;
 }
 
@@ -176,7 +224,7 @@ fieldset.field {
   display: flex;
   flex-wrap: wrap;
   gap: 1.25rem;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .choices label,
@@ -201,7 +249,7 @@ fieldset.field {
   color: var(--surface);
   border-radius: 0.5rem;
   padding: 0.7rem 1.2rem;
-  font-weight: 600;
+  font-weight: 700;
   text-decoration: none;
   cursor: pointer;
 }
@@ -256,7 +304,7 @@ fieldset.field {
 .field-error {
   color: var(--error);
   font-size: 0.9rem;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .field [aria-invalid="true"] {
@@ -266,7 +314,7 @@ fieldset.field {
 .notice {
   margin-top: 1.5rem;
   padding: 1rem;
-  border-left: 4px solid var(--olive);
+  border-left: 4px solid var(--brass);
   background: var(--surface);
 }
 
@@ -314,21 +362,21 @@ fieldset.field {
 
 .tag-filter-label {
   font-size: 0.85rem;
-  font-weight: 500;
+  font-weight: 600;
   margin-right: 0.25rem;
 }
 
 .tag-toggle {
   font-size: 0.85rem;
-  color: var(--olive);
-  border: 1px solid var(--olive);
+  color: var(--brass);
+  border: 1px solid var(--brass);
   border-radius: 999px;
   padding: 0.25rem 0.75rem;
   cursor: pointer;
 }
 
 .tag-toggle[aria-pressed="true"] {
-  background: var(--olive);
+  background: var(--brass);
   color: var(--surface);
 }
 
@@ -375,14 +423,14 @@ fieldset.field {
 
 .stat-tile dd {
   font-size: 2.25rem;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.2;
   color: var(--foreground);
 }
 
 .stat-tile .unit {
   font-size: 1rem;
-  font-weight: 400;
+  font-weight: 500;
   color: var(--muted);
 }
 
@@ -394,7 +442,7 @@ fieldset.field {
 .section-title {
   font-family: var(--font-display), Georgia, serif;
   font-size: 1.2rem;
-  font-weight: 600;
+  font-weight: 800;
   color: var(--burgundy);
   margin-bottom: 0.75rem;
 }
@@ -471,7 +519,7 @@ fieldset.field {
 .pick-result h2 {
   font-family: var(--font-display), Georgia, serif;
   font-size: 2rem;
-  font-weight: 600;
+  font-weight: 800;
   color: var(--burgundy);
 }
 
@@ -482,6 +530,96 @@ fieldset.field {
 .pick-vibe {
   font-style: italic;
   color: var(--muted);
+}
+
+/* Map */
+.page.wide {
+  max-width: 56rem;
+}
+
+.sf-map {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: 1rem;
+  font-family: var(--font-display), Georgia, serif;
+}
+
+.sf-map-ocean {
+  fill: #3a0c14;
+}
+
+/* Thin seams between the tiles. */
+.sf-map polygon {
+  stroke: #3a0c14;
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+}
+
+.sf-label {
+  font-weight: 800;
+  text-anchor: middle;
+  letter-spacing: 0.02em;
+  pointer-events: none;
+}
+
+/* Parks and the Presidio: darker, and not clickable. */
+.sf-landmark {
+  fill: #4a1520;
+}
+
+.sf-landmark-label {
+  font-style: italic;
+  font-weight: 700;
+  text-anchor: middle;
+  fill: var(--gold);
+  opacity: 0.8;
+}
+
+.sf-area {
+  cursor: pointer;
+}
+
+.sf-area polygon {
+  transition: filter 0.15s ease;
+}
+
+.sf-area:hover polygon,
+.sf-area:focus-visible polygon {
+  filter: brightness(1.15) saturate(1.1);
+  stroke: var(--gold);
+}
+
+.sf-area:focus-visible {
+  outline: none;
+}
+
+.sf-count circle {
+  fill: var(--gold);
+  stroke: #3a0c14;
+  stroke-width: 1.5;
+}
+
+.sf-count text {
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  text-anchor: middle;
+  fill: #3a0c14;
+  pointer-events: none;
+}
+
+.map-list {
+  margin-top: 0.75rem;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.map-list li {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  padding: 0.3rem 0;
 }
 
 /* Bars */
@@ -532,7 +670,7 @@ fieldset.field {
 }
 
 .star-button.full {
-  font-weight: 600;
+  font-weight: 700;
   border: 1px solid var(--gold);
   border-radius: 999px;
   padding: 0.45rem 0.9rem;
@@ -550,7 +688,7 @@ fieldset.field {
 .bar-card h2 {
   font-family: var(--font-display), Georgia, serif;
   font-size: 1.2rem;
-  font-weight: 600;
+  font-weight: 800;
   color: var(--burgundy);
 }
 
@@ -573,17 +711,17 @@ fieldset.field {
 
 .tag {
   font-size: 0.78rem;
-  color: var(--olive);
-  background: #eeeedd;
+  color: var(--brass);
+  background: #f1e6cf;
   border-radius: 999px;
   padding: 0.1rem 0.55rem;
 }
 
 .badge {
   font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--olive);
-  border: 1px solid var(--olive);
+  font-weight: 700;
+  color: var(--brass);
+  border: 1px solid var(--brass);
   border-radius: 999px;
   padding: 0.15rem 0.6rem;
   white-space: nowrap;
@@ -597,10 +735,10 @@ fieldset.field {
 
 .details dt {
   font-size: 0.8rem;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--olive);
+  color: var(--brass);
 }
 
 .details .notes {

@@ -62,6 +62,7 @@ async function AccountLinks() {
       <Link href="/journal">Journal</Link>
       <Link href="/favorites">Favorites</Link>
       <Link href="/wishlist">Wishlist</Link>
+      <Link href="/map">Map</Link>
       <Link href="/dashboard">Dashboard</Link>
       <Link href="/tonight">Pick a bar</Link>
       <Link href="/bars/new">Add bar</Link>
