@@ -61,6 +61,7 @@ async function AccountLinks() {
     <>
       <Link href="/journal">Journal</Link>
       <Link href="/favorites">Favorites</Link>
+      <Link href="/dashboard">Dashboard</Link>
       <Link href="/bars/new">Add bar</Link>
       <form action={logOut}>
         <button type="submit" className="link-button">
