@@ -14,7 +14,7 @@ export default function JournalPage({ searchParams }: PageProps<"/journal">) {
     <main className="page">
       <div className="page-heading">
         <h1>My journal</h1>
-        <Link href="/bars/new" className="button">
+        <Link href="/bars/new?status=visited" className="button">
           Add bar
         </Link>
       </div>
@@ -32,14 +32,17 @@ async function JournalBars({
 }: {
   params: Awaited<PageProps<"/journal">["searchParams"]>;
 }) {
-  const bars = await listBars();
+  // The Journal is the bars you've been to; want-to-try bars live on the
+  // Wishlist until you mark them visited.
+  const bars = await listBars("visited");
 
   if (bars.length === 0) {
     return (
       <div className="card empty">
-        <p>No bars yet.</p>
+        <p>No visited bars yet.</p>
         <p>
-          <Link href="/bars/new">Add your first bar</Link>
+          <Link href="/bars/new?status=visited">Add a bar you&apos;ve been to</Link>
+          , or check your <Link href="/wishlist">wishlist</Link>.
         </p>
       </div>
     );

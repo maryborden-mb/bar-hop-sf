@@ -31,16 +31,30 @@ export function validateBar(values: BarFormValues): BarFieldErrors {
   }
 
   if (values.visit_status === "visited") {
-    const rating = Number(values.rating);
-    if (!values.rating) {
-      errors.rating = "You've been here, so give it a rating from 1 to 5 stars.";
-    } else if (!Number.isInteger(rating) || rating < 1 || rating > 5) {
-      errors.rating = "Ratings go from 1 to 5 stars.";
-    }
+    Object.assign(errors, validateVisit(values));
+  }
 
-    if (values.would_return !== "yes" && values.would_return !== "no") {
-      errors.would_return = "Would you go back? Choose Yes or No.";
-    }
+  return errors;
+}
+
+export type VisitFieldErrors = Pick<BarFieldErrors, "rating" | "would_return">;
+
+// The extra answers a visited bar needs: used by the bar form and by
+// "mark as visited" on a want-to-try bar.
+export function validateVisit(
+  values: Pick<BarFormValues, "rating" | "would_return">,
+): VisitFieldErrors {
+  const errors: VisitFieldErrors = {};
+
+  const rating = Number(values.rating);
+  if (!values.rating) {
+    errors.rating = "You've been here, so give it a rating from 1 to 5 stars.";
+  } else if (!Number.isInteger(rating) || rating < 1 || rating > 5) {
+    errors.rating = "Ratings go from 1 to 5 stars.";
+  }
+
+  if (values.would_return !== "yes" && values.would_return !== "no") {
+    errors.would_return = "Would you go back? Choose Yes or No.";
   }
 
   return errors;
