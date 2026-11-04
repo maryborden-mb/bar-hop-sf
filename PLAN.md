@@ -19,7 +19,7 @@ I'm building **Bar Hop SF**, a personal journal for San Francisco bars, because 
 **My 3 features**
 
 8. **Want-to-try list**: As a user, I want to save bars I haven't been to yet in a separate list, and mark them "visited" later, so that I remember recommendations.
-9. **"Good for" tags**: As a user, I want to tag bars as good for things like *outdoor seating, sunny, watching sports, big groups, food*, and filter by those tags, so that I can match a bar to the occasion.
+9. **"Good for" tags**: As a user, I want to tag bars as good for things like *sunny, watching sports, big groups, food*, and filter by those tags, so that I can match a bar to the occasion.
 10. **"Pick a bar for tonight"**: As a user, I want a button that randomly picks one of my visited bars rated 4+ (optionally in a chosen neighborhood), so that I can stop debating where to go.
 
 ## 3. Database
@@ -39,8 +39,9 @@ I'm building **Bar Hop SF**, a personal journal for San Francisco bars, because 
 | | visit_status | text | Required: `visited` or `want_to_try` |
 | | rating | number | 1–5. Required only if visited. |
 | | would_return | true/false | Required only if visited |
+| | has_outdoor_seating | true/false | Defaults to false |
 | | vibe | text | Optional (e.g., "Casual, lively") |
-| | good_for | text (list) | Optional tags: outdoor seating, sunny, sports, big groups, food |
+| | good_for | text (list) | Optional tags: sunny, sports, big groups, food |
 | | notes | text | Optional |
 | | created_at | date | Used for "newest first" sort |
 | **stars** | user_id | text | References users.id |
