@@ -11,6 +11,11 @@
   --olive: #6b6b3a;
   --border: #e3d6bf;
   --error: #a8261c;
+
+  /* Cocktail-bar wallpaper: gold art-deco fans on deep burgundy. Pages sit
+     on a cream "menu card" on top of it, so text stays easy to read. */
+  --wallpaper-color: #5a1c25;
+  --wallpaper-pattern: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='56' height='28' viewBox='0 0 56 28'><g fill='none' stroke='%23d4a94f' stroke-opacity='0.5' stroke-width='1.4'><circle cx='28' cy='28' r='22'/><circle cx='0' cy='0' r='22'/><circle cx='56' cy='0' r='22'/><circle cx='28' cy='28' r='16'/><circle cx='0' cy='0' r='16'/><circle cx='56' cy='0' r='16'/><circle cx='28' cy='28' r='10'/><circle cx='0' cy='0' r='10'/><circle cx='56' cy='0' r='10'/><circle cx='28' cy='28' r='4'/><circle cx='0' cy='0' r='4'/><circle cx='56' cy='0' r='4'/></g></svg>");
 }
 
 @theme inline {
@@ -21,13 +26,16 @@
 }
 
 body {
-  background: var(--background);
+  background-color: var(--wallpaper-color);
+  background-image: var(--wallpaper-pattern);
   color: var(--foreground);
   font-family: var(--font-body), system-ui, sans-serif;
+  font-weight: 500;
 }
 
 h1 {
   font-family: var(--font-display), Georgia, serif;
+  font-weight: 800;
   font-size: 2rem;
   line-height: 1.15;
   color: var(--burgundy);
@@ -52,7 +60,7 @@ a {
 .brand {
   font-family: var(--font-display), Georgia, serif;
   font-size: 1.35rem;
-  font-weight: 600;
+  font-weight: 800;
   text-decoration: none;
 }
 
@@ -67,11 +75,23 @@ a {
   gap: 0.5rem 1rem;
 }
 
+/* Each page is a cream "menu card" on the wallpaper. */
 .page {
-  width: 100%;
+  width: calc(100% - 2rem);
   max-width: 48rem;
-  margin: 0 auto;
-  padding: 2.5rem 1.25rem;
+  margin: 2rem auto;
+  padding: 2.25rem 1.5rem;
+  background: var(--background);
+  border-radius: 1rem;
+  box-shadow: 0 10px 40px rgb(20 4 8 / 0.35);
+}
+
+@media (max-width: 480px) {
+  .page {
+    width: calc(100% - 1.5rem);
+    margin: 1rem auto;
+    padding: 1.75rem 1.1rem;
+  }
 }
 
 .page.narrow {
@@ -103,7 +123,7 @@ a {
   text-transform: uppercase;
   letter-spacing: 0.12em;
   font-size: 0.8rem;
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 0.75rem;
 }
 
@@ -136,7 +156,7 @@ a {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .field input,
@@ -176,7 +196,7 @@ fieldset.field {
   display: flex;
   flex-wrap: wrap;
   gap: 1.25rem;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .choices label,
@@ -201,7 +221,7 @@ fieldset.field {
   color: var(--surface);
   border-radius: 0.5rem;
   padding: 0.7rem 1.2rem;
-  font-weight: 600;
+  font-weight: 700;
   text-decoration: none;
   cursor: pointer;
 }
@@ -256,7 +276,7 @@ fieldset.field {
 .field-error {
   color: var(--error);
   font-size: 0.9rem;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .field [aria-invalid="true"] {
@@ -314,7 +334,7 @@ fieldset.field {
 
 .tag-filter-label {
   font-size: 0.85rem;
-  font-weight: 500;
+  font-weight: 600;
   margin-right: 0.25rem;
 }
 
@@ -375,14 +395,14 @@ fieldset.field {
 
 .stat-tile dd {
   font-size: 2.25rem;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.2;
   color: var(--foreground);
 }
 
 .stat-tile .unit {
   font-size: 1rem;
-  font-weight: 400;
+  font-weight: 500;
   color: var(--muted);
 }
 
@@ -394,7 +414,7 @@ fieldset.field {
 .section-title {
   font-family: var(--font-display), Georgia, serif;
   font-size: 1.2rem;
-  font-weight: 600;
+  font-weight: 800;
   color: var(--burgundy);
   margin-bottom: 0.75rem;
 }
@@ -471,7 +491,7 @@ fieldset.field {
 .pick-result h2 {
   font-family: var(--font-display), Georgia, serif;
   font-size: 2rem;
-  font-weight: 600;
+  font-weight: 800;
   color: var(--burgundy);
 }
 
@@ -532,7 +552,7 @@ fieldset.field {
 }
 
 .star-button.full {
-  font-weight: 600;
+  font-weight: 700;
   border: 1px solid var(--gold);
   border-radius: 999px;
   padding: 0.45rem 0.9rem;
@@ -550,7 +570,7 @@ fieldset.field {
 .bar-card h2 {
   font-family: var(--font-display), Georgia, serif;
   font-size: 1.2rem;
-  font-weight: 600;
+  font-weight: 800;
   color: var(--burgundy);
 }
 
@@ -581,7 +601,7 @@ fieldset.field {
 
 .badge {
   font-size: 0.8rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--olive);
   border: 1px solid var(--olive);
   border-radius: 999px;
@@ -597,7 +617,7 @@ fieldset.field {
 
 .details dt {
   font-size: 0.8rem;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--olive);
