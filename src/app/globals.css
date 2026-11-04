@@ -532,6 +532,98 @@ fieldset.field {
   color: var(--muted);
 }
 
+/* Map */
+.page.wide {
+  max-width: 56rem;
+}
+
+.sf-map {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: 1rem;
+  font-family: var(--font-display), Georgia, serif;
+}
+
+.sf-map-ocean {
+  fill: #3a0c14;
+}
+
+/* Thin dark gaps between shapes read as streets. */
+.sf-map polygon {
+  stroke: #3a0c14;
+  stroke-width: 3;
+  stroke-linejoin: round;
+}
+
+.sf-label {
+  font-size: 9.5px;
+  font-weight: 800;
+  text-anchor: middle;
+  letter-spacing: 0.02em;
+  pointer-events: none;
+}
+
+/* Parks and the Presidio: darker, and not clickable. */
+.sf-landmark {
+  fill: #4a1520;
+}
+
+.sf-landmark-label {
+  font-size: 10px;
+  font-style: italic;
+  font-weight: 700;
+  text-anchor: middle;
+  fill: var(--gold);
+  opacity: 0.8;
+}
+
+.sf-area {
+  cursor: pointer;
+}
+
+.sf-area polygon {
+  transition: filter 0.15s ease;
+}
+
+.sf-area:hover polygon,
+.sf-area:focus-visible polygon {
+  filter: brightness(1.15) saturate(1.1);
+  stroke: var(--gold);
+}
+
+.sf-area:focus-visible {
+  outline: none;
+}
+
+.sf-count circle {
+  fill: var(--gold);
+  stroke: #3a0c14;
+  stroke-width: 1.5;
+}
+
+.sf-count text {
+  font-family: var(--font-body), system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  text-anchor: middle;
+  fill: #3a0c14;
+  pointer-events: none;
+}
+
+.map-list {
+  margin-top: 0.75rem;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.map-list li {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  padding: 0.3rem 0;
+}
+
 /* Bars */
 .bar-list {
   display: flex;
