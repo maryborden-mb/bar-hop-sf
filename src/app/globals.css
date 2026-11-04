@@ -445,6 +445,45 @@ fieldset.field {
   font-variant-numeric: tabular-nums;
 }
 
+/* Pick a bar for tonight */
+.picker-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.picker-controls .field {
+  flex: 1 1 12rem;
+}
+
+.pick-result {
+  margin-top: 0;
+  text-align: center;
+  border-color: var(--burgundy);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.pick-result h2 {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--burgundy);
+}
+
+.pick-result .tags {
+  justify-content: center;
+}
+
+.pick-vibe {
+  font-style: italic;
+  color: var(--muted);
+}
+
 /* Bars */
 .bar-list {
   display: flex;
