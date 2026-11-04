@@ -241,6 +241,23 @@ fieldset.field {
   color: var(--error);
 }
 
+.error-summary {
+  color: var(--error);
+  background: var(--surface);
+  border-left: 4px solid var(--error);
+  padding: 0.75rem 1rem;
+}
+
+.field-error {
+  color: var(--error);
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+
+.field [aria-invalid="true"] {
+  border-color: var(--error);
+}
+
 .notice {
   margin-top: 1.5rem;
   padding: 1rem;
