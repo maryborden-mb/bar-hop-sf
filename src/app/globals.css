@@ -56,10 +56,15 @@ a {
   text-decoration: none;
 }
 
+.site-header {
+  flex-wrap: wrap;
+}
+
 .nav {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 1rem;
+  gap: 0.5rem 1rem;
 }
 
 .page {
@@ -289,16 +294,56 @@ fieldset.field {
 .bar-card {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+  gap: 0.75rem;
   margin-top: 0;
-  padding: 1rem 1.25rem;
-  color: inherit;
-  text-decoration: none;
+  padding: 1rem 1.25rem 1rem 0.75rem;
 }
 
 .bar-card:hover {
   border-color: var(--burgundy);
+}
+
+.bar-card-link {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Favorite toggle: a gold star, kept apart from the burgundy rating stars. */
+.star-button {
+  --gold: #b8860b;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--gold);
+  cursor: pointer;
+  line-height: 1;
+}
+
+.star-button.icon {
+  font-size: 1.6rem;
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+}
+
+.star-button.full {
+  font-weight: 600;
+  border: 1px solid var(--gold);
+  border-radius: 999px;
+  padding: 0.45rem 0.9rem;
+  white-space: nowrap;
+}
+
+.star-button.full span {
+  font-size: 1.2rem;
+}
+
+.star-button:hover {
+  background: #fbf3dc;
 }
 
 .bar-card h2 {
