@@ -9,6 +9,7 @@ export type BarFormValues = {
   rating: string;
   would_return: string; // "yes", "no", or ""
   has_outdoor_seating: boolean;
+  good_for: string[];
   vibe: string;
   notes: string;
 };
@@ -21,6 +22,7 @@ export const EMPTY_BAR_FORM: BarFormValues = {
   rating: "",
   would_return: "",
   has_outdoor_seating: false,
+  good_for: [],
   vibe: "",
   notes: "",
 };
@@ -35,6 +37,7 @@ export function barToFormValues(bar: Bar): BarFormValues {
     would_return:
       bar.would_return === null ? "" : bar.would_return ? "yes" : "no",
     has_outdoor_seating: bar.has_outdoor_seating,
+    good_for: bar.good_for,
     vibe: bar.vibe ?? "",
     notes: bar.notes ?? "",
   };

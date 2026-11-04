@@ -22,6 +22,14 @@ export const GOOD_FOR_TAGS = [
 ] as const;
 export type GoodForTag = (typeof GOOD_FOR_TAGS)[number];
 
+// How each tag reads in the app.
+export const GOOD_FOR_LABELS: Record<GoodForTag, string> = {
+  sunny: "Sunny",
+  sports: "Watching sports",
+  "big groups": "Big groups",
+  food: "Food",
+};
+
 export type Neighborhood = {
   id: number;
   name: string;

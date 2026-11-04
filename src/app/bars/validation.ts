@@ -1,4 +1,4 @@
-import { BAR_TYPES, VISIT_STATUSES } from "@/lib/types";
+import { BAR_TYPES, GOOD_FOR_TAGS, VISIT_STATUSES } from "@/lib/types";
 import type { BarFormValues } from "./form-values";
 
 export type BarFieldErrors = Partial<Record<keyof BarFormValues, string>>;
@@ -32,6 +32,10 @@ export function validateBar(values: BarFormValues): BarFieldErrors {
 
   if (values.visit_status === "visited") {
     Object.assign(errors, validateVisit(values));
+  }
+
+  if (values.good_for.some((tag) => !(GOOD_FOR_TAGS as readonly string[]).includes(tag))) {
+    errors.good_for = "Please pick tags from the list.";
   }
 
   return errors;

@@ -305,6 +305,33 @@ fieldset.field {
   font-size: 0.85rem;
 }
 
+.tag-filter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.tag-filter-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-right: 0.25rem;
+}
+
+.tag-toggle {
+  font-size: 0.85rem;
+  color: var(--olive);
+  border: 1px solid var(--olive);
+  border-radius: 999px;
+  padding: 0.25rem 0.75rem;
+  cursor: pointer;
+}
+
+.tag-toggle[aria-pressed="true"] {
+  background: var(--olive);
+  color: var(--surface);
+}
+
 .filter-bar .link-button {
   align-self: flex-start;
   font-size: 0.9rem;
@@ -496,6 +523,21 @@ fieldset.field {
 
 .stars-empty {
   color: var(--border);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.4rem;
+}
+
+.tag {
+  font-size: 0.78rem;
+  color: var(--olive);
+  background: #eeeedd;
+  border-radius: 999px;
+  padding: 0.1rem 0.55rem;
 }
 
 .badge {

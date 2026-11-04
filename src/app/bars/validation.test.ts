@@ -86,3 +86,15 @@ describe("validateVisit (marking a want-to-try bar as visited)", () => {
     });
   });
 });
+
+describe("validateBar tags", () => {
+  it("accepts tags from the list", () => {
+    expect(validateBar({ ...visitedBar, good_for: ["sunny", "food"] })).toEqual({});
+  });
+
+  it("rejects a tag that isn't in the list", () => {
+    expect(validateBar({ ...visitedBar, good_for: ["karaoke"] }).good_for).toBe(
+      "Please pick tags from the list.",
+    );
+  });
+});

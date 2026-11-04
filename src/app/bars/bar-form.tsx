@@ -2,7 +2,12 @@
 
 import Link from "next/link";
 import { useActionState, useState } from "react";
-import { BAR_TYPES, type Neighborhood } from "@/lib/types";
+import {
+  BAR_TYPES,
+  GOOD_FOR_LABELS,
+  GOOD_FOR_TAGS,
+  type Neighborhood,
+} from "@/lib/types";
 import type { BarFormState } from "./actions";
 import type { BarFormValues } from "./form-values";
 
@@ -172,6 +177,26 @@ export function BarForm({
         />
         Has outdoor seating
       </label>
+
+      <fieldset className="field" {...errorProps("good_for")}>
+        <legend>
+          Good for <span className="muted">(optional)</span>
+        </legend>
+        <div className="choices">
+          {GOOD_FOR_TAGS.map((tag) => (
+            <label key={tag}>
+              <input
+                type="checkbox"
+                name="good_for"
+                value={tag}
+                defaultChecked={values.good_for.includes(tag)}
+              />
+              {GOOD_FOR_LABELS[tag]}
+            </label>
+          ))}
+        </div>
+        <FieldError id="good_for-error" message={errors.good_for} />
+      </fieldset>
 
       <label className="field">
         <span>

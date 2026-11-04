@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { BarWithNeighborhood } from "@/lib/bars";
 import { StarButton } from "./star-button";
 import { Stars } from "./stars";
+import { TagList } from "./tag-list";
 
 // A list of bar cards, used by the Journal and Favorites pages.
 export function BarList({ bars }: { bars: BarWithNeighborhood[] }) {
@@ -17,6 +18,7 @@ export function BarList({ bars }: { bars: BarWithNeighborhood[] }) {
                 {bar.neighborhood.name} · {bar.type}
                 {bar.has_outdoor_seating && " · Outdoor seating"}
               </p>
+              <TagList tags={bar.good_for} />
             </div>
             {bar.visit_status === "visited" && bar.rating ? (
               <Stars rating={bar.rating} />

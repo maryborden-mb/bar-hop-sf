@@ -30,9 +30,9 @@ function bar(overrides: Partial<Bar>): Bar {
 }
 
 const bars: Bar[] = [
-  bar({ id: 1, name: "Greens", rating: 4, notes: "Pool table", created_at: "2026-11-01T00:00:00Z" }),
-  bar({ id: 2, name: "Zeitgeist", neighborhood_id: MISSION, type: "Dive", rating: 4, notes: "Good for big groups", created_at: "2026-11-02T00:00:00Z" }),
-  bar({ id: 3, name: "Howell's", type: "Wine", rating: 5, notes: "Parklet in the sun", created_at: "2026-11-03T00:00:00Z" }),
+  bar({ id: 1, name: "Greens", rating: 4, notes: "Pool table", good_for: ["sports", "food"], created_at: "2026-11-01T00:00:00Z" }),
+  bar({ id: 2, name: "Zeitgeist", neighborhood_id: MISSION, type: "Dive", rating: 4, notes: "Good for big groups", good_for: ["big groups"], created_at: "2026-11-02T00:00:00Z" }),
+  bar({ id: 3, name: "Howell's", type: "Wine", rating: 5, notes: "Parklet in the sun", good_for: ["sunny", "food"], created_at: "2026-11-03T00:00:00Z" }),
   bar({ id: 4, name: "boardroom", rating: 3, created_at: "2026-11-04T00:00:00Z" }),
   bar({ id: 5, name: "Zam Zam", neighborhood_id: MISSION, type: "Cocktail", visit_status: "want_to_try", rating: null, would_return: null, created_at: "2026-11-05T00:00:00Z" }),
 ];
@@ -79,6 +79,15 @@ describe("applyFilters", () => {
     ]);
   });
 
+  it("filters by a tag", () => {
+    expect(ids(applyFilters(bars, { ...DEFAULT_FILTERS, tags: ["food"] }))).toEqual([3, 1]);
+  });
+
+  it("needs every chosen tag when several are picked", () => {
+    expect(ids(applyFilters(bars, { ...DEFAULT_FILTERS, tags: ["sunny", "food"] }))).toEqual([3]);
+    expect(ids(applyFilters(bars, { ...DEFAULT_FILTERS, tags: ["sunny", "big groups"] }))).toEqual([]);
+  });
+
   it("doesn't change the original list", () => {
     const before = ids(bars);
     applyFilters(bars, { ...DEFAULT_FILTERS, sort: "name" });
@@ -88,20 +97,23 @@ describe("applyFilters", () => {
 
 describe("parseFilters", () => {
   it("reads filters from the URL", () => {
-    expect(parseFilters({ q: " pool ", neighborhood: "17", type: "Dive", sort: "rating" })).toEqual({
+    expect(
+      parseFilters({ q: " pool ", neighborhood: "17", type: "Dive", tags: "food,sunny", sort: "rating" }),
+    ).toEqual({
       q: "pool",
       neighborhood: 17,
       type: "Dive",
+      tags: ["sunny", "food"],
       sort: "rating",
     });
   });
 
   it("falls back to defaults for missing or made-up values", () => {
-    expect(parseFilters({ neighborhood: "abc", type: "Karaoke", sort: "random" })).toEqual(DEFAULT_FILTERS);
+    expect(parseFilters({ neighborhood: "abc", type: "Karaoke", tags: "karaoke", sort: "random" })).toEqual(DEFAULT_FILTERS);
   });
 
   it("round-trips through the URL", () => {
-    const filters = { q: "sun", neighborhood: 17, type: "Wine" as const, sort: "name" as const };
+    const filters = { q: "sun", neighborhood: 17, type: "Wine" as const, tags: ["sunny" as const, "food" as const], sort: "name" as const };
     expect(parseFilters(Object.fromEntries(new URLSearchParams(filtersToQuery(filters))))).toEqual(filters);
   });
 
