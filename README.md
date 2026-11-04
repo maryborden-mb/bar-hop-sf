@@ -21,6 +21,17 @@ You need Node.js 24 and a Supabase project.
 
 ## Tests
 
+Unit tests (fast, no network):
+
 ```bash
 npm test
+```
+
+Data isolation test (PLAN.md test 1). It runs against the real Supabase project in `.env.local`: it creates two throwaway accounts and checks that one user can never read, edit, delete, or star the other's bars. It needs:
+
+- **Confirm email** turned off in Supabase (Authentication → Sign In / Providers → User Signups)
+- `TEST_EMAIL` in `.env.local` set to an address you own. Test accounts use `+` tags on it (`you+bar-hop-test-a-…@domain`), because Supabase rejects made-up domains like example.com
+
+```bash
+npm run test:isolation
 ```
