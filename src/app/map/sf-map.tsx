@@ -1,6 +1,13 @@
 import Link from "next/link";
 import type { Neighborhood } from "@/lib/types";
-import { MAP_HEIGHT, MAP_WIDTH, SF_AREAS, centerOf, type MapArea } from "./sf-shapes";
+import {
+  MAP_HEIGHT,
+  MAP_WIDTH,
+  SF_AREAS,
+  centerOf,
+  labelSize,
+  type MapArea,
+} from "./sf-shapes";
 
 // Neighborhood fills, from the app's burgundy and gold palette. Each has a
 // text color that reads on it. Shapes pick one with `tone`.
@@ -76,6 +83,7 @@ export function SfMap({ neighborhoods, counts }: Props) {
         {SF_AREAS.map((area) => {
           const [x, y] = area.labelAt ?? centerOf(area.points);
           const lines = area.label ?? [area.name];
+          const size = area.fontSize ?? labelSize(area.points, lines);
           if (area.landmark) {
             return (
               <MapLabel
@@ -83,6 +91,7 @@ export function SfMap({ neighborhoods, counts }: Props) {
                 x={x}
                 y={y}
                 lines={lines}
+                size={size}
                 className="sf-landmark-label"
               />
             );
@@ -90,11 +99,17 @@ export function SfMap({ neighborhoods, counts }: Props) {
           const count = countFor(area);
           return (
             <g key={area.name}>
-              <MapLabel x={x} y={y} lines={lines} fill={colorsFor(area).text} />
+              <MapLabel
+                x={x}
+                y={y}
+                lines={lines}
+                size={size}
+                fill={colorsFor(area).text}
+              />
               {count > 0 && (
                 <g
                   className="sf-count"
-                  transform={`translate(${x} ${y - lines.length * 6 - 11})`}
+                  transform={`translate(${x} ${y - (lines.length * size * 1.1) / 2 - 10})`}
                 >
                   <circle r="8.5" />
                   <text dy="3.2">{count}</text>
@@ -112,21 +127,24 @@ function MapLabel({
   x,
   y,
   lines,
+  size,
   fill,
   className = "sf-label",
 }: {
   x: number;
   y: number;
   lines: string[];
+  size: number;
   fill?: string;
   className?: string;
 }) {
   if (lines.length === 0) return null;
-  const top = y - ((lines.length - 1) * 11) / 2 + 3.5;
+  const lineHeight = size * 1.1;
+  const top = y - ((lines.length - 1) * lineHeight) / 2 + size * 0.35;
   return (
-    <text x={x} y={top} className={className} fill={fill}>
+    <text x={x} y={top} className={className} fill={fill} fontSize={size}>
       {lines.map((line, i) => (
-        <tspan key={line} x={x} dy={i === 0 ? 0 : 11}>
+        <tspan key={line} x={x} dy={i === 0 ? 0 : lineHeight}>
           {line}
         </tspan>
       ))}

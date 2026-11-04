@@ -549,15 +549,14 @@ fieldset.field {
   fill: #3a0c14;
 }
 
-/* Thin dark gaps between shapes read as streets. */
+/* Thin seams between the tiles. */
 .sf-map polygon {
   stroke: #3a0c14;
-  stroke-width: 3;
+  stroke-width: 1.5;
   stroke-linejoin: round;
 }
 
 .sf-label {
-  font-size: 9.5px;
   font-weight: 800;
   text-anchor: middle;
   letter-spacing: 0.02em;
@@ -570,7 +569,6 @@ fieldset.field {
 }
 
 .sf-landmark-label {
-  font-size: 10px;
   font-style: italic;
   font-weight: 700;
   text-anchor: middle;
