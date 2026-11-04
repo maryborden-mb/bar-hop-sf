@@ -73,6 +73,22 @@ a {
   max-width: 26rem;
 }
 
+.page.narrow-form {
+  max-width: 36rem;
+}
+
+.page-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.page-heading h1 {
+  margin-bottom: 0;
+}
+
 .hero h1 {
   font-size: clamp(2.25rem, 7vw, 3.5rem);
 }
@@ -118,7 +134,9 @@ a {
   font-weight: 500;
 }
 
-.field input {
+.field input,
+.field select,
+.field textarea {
   border: 1px solid var(--border);
   background: var(--surface);
   border-radius: 0.5rem;
@@ -126,9 +144,48 @@ a {
   font: inherit;
 }
 
-.field input:focus {
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
   outline: 2px solid var(--olive);
   outline-offset: 1px;
+}
+
+fieldset.field {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.field legend {
+  margin-bottom: 0.35rem;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: 1rem;
+}
+
+.choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  font-weight: 400;
+}
+
+.choices label,
+.checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.choices input,
+.checkbox input {
+  accent-color: var(--burgundy);
+  width: 1.05rem;
+  height: 1.05rem;
 }
 
 .button {
@@ -163,6 +220,17 @@ a {
   border: 1px solid var(--burgundy);
 }
 
+.button.danger {
+  background: transparent;
+  color: var(--error);
+  border: 1px solid var(--error);
+}
+
+.button.danger:hover {
+  background: var(--error);
+  color: var(--surface);
+}
+
 .link-button {
   color: var(--burgundy);
   text-decoration: underline;
@@ -191,4 +259,72 @@ a {
 .card.empty {
   text-align: center;
   color: var(--muted);
+}
+
+/* Bars */
+.bar-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.bar-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0;
+  padding: 1rem 1.25rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.bar-card:hover {
+  border-color: var(--burgundy);
+}
+
+.bar-card h2 {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--burgundy);
+}
+
+.stars {
+  color: var(--burgundy);
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+
+.stars-empty {
+  color: var(--border);
+}
+
+.badge {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--olive);
+  border: 1px solid var(--olive);
+  border-radius: 999px;
+  padding: 0.15rem 0.6rem;
+  white-space: nowrap;
+}
+
+.details {
+  display: grid;
+  gap: 0.9rem;
+  margin-top: 0;
+}
+
+.details dt {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--olive);
+}
+
+.details .notes {
+  white-space: pre-line;
 }
