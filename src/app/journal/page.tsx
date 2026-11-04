@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
-import { listBars } from "@/lib/bars";
+import { listBars, listNeighborhoods } from "@/lib/bars";
 import type { Neighborhood } from "@/lib/types";
 import { BarList } from "@/app/bars/bar-list";
 import { applyFilters, parseFilters } from "./filters";
@@ -51,10 +51,18 @@ async function JournalBars({
   const filters = parseFilters(params);
   const matches = applyFilters(bars, filters);
 
-  // Only offer neighborhoods you have bars in.
-  const neighborhoods = [
-    ...new Map(bars.map((b) => [b.neighborhood.id, b.neighborhood])).values(),
-  ].sort((a: Neighborhood, b: Neighborhood) => a.name.localeCompare(b.name));
+  // Only offer neighborhoods you have bars in, plus the one in the URL (the
+  // Map can link to a neighborhood with no visited bars yet).
+  const byId = new Map(bars.map((b) => [b.neighborhood.id, b.neighborhood]));
+  if (filters.neighborhood && !byId.has(filters.neighborhood)) {
+    const chosen = (await listNeighborhoods()).find(
+      (n) => n.id === filters.neighborhood,
+    );
+    if (chosen) byId.set(chosen.id, chosen);
+  }
+  const neighborhoods = [...byId.values()].sort(
+    (a: Neighborhood, b: Neighborhood) => a.name.localeCompare(b.name),
+  );
 
   return (
     <>

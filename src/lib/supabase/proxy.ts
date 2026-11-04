@@ -9,6 +9,7 @@ const PROTECTED_PATHS = [
   "/wishlist",
   "/dashboard",
   "/tonight",
+  "/map",
 ];
 
 // Runs before every page request: refreshes the Supabase session cookies and

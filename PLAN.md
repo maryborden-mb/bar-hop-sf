@@ -88,4 +88,5 @@ Inspiration: a personal notes app mixed with a city guide, rather than a public 
 
 - **Least sure I can build:** the data isolation test. Proving User B can't see User A's data means setting up two test accounts and testing against the real database rules, not just the UI.
 - **Cut first if short on time:** "Good for" tags (feature 9). They need their own filter logic and form input. The random pick (feature 10) can still work without them, filtering by neighborhood and rating only.
-- **Not in scope for now:** a Map page. Placing bars on a map needs each bar's location, which means an outside geocoding or places API. That fits better in the team project (Assignment H), which is about connecting to outside services.
+- **Not in scope for now:** placing individual bars on a real map. That needs each bar's location, which means an outside geocoding or places API. That fits better in the team project (Assignment H), which is about connecting to outside services.
+- **Added after the plan:** a neighborhood-level **Map** page. It's a hand-drawn style map of SF neighborhoods (no real streets, no outside services) where clicking a neighborhood opens the Journal filtered to it.
