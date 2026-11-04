@@ -2,10 +2,16 @@
 
 import { deleteBar } from "./actions";
 
-export function DeleteBarButton({ id, name }: { id: number; name: string }) {
+type Props = {
+  id: number;
+  name: string;
+  returnTo: "/journal" | "/wishlist";
+};
+
+export function DeleteBarButton({ id, name, returnTo }: Props) {
   return (
     <form
-      action={deleteBar.bind(null, id)}
+      action={deleteBar.bind(null, id, returnTo)}
       onSubmit={(event) => {
         if (!window.confirm(`Delete ${name}? This can't be undone.`)) {
           event.preventDefault();

@@ -5,7 +5,12 @@ import { redirect } from "next/navigation";
 import { requireUser } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
 import type { BarFormValues } from "./form-values";
-import { validateBar, type BarFieldErrors } from "./validation";
+import {
+  validateBar,
+  validateVisit,
+  type BarFieldErrors,
+  type VisitFieldErrors,
+} from "./validation";
 
 export type BarFormState = {
   error?: string;
@@ -111,6 +116,47 @@ export async function updateBar(
   redirect(`/bars/${id}`);
 }
 
+export type MarkVisitedState = {
+  error?: string;
+  fieldErrors?: VisitFieldErrors;
+  values?: { rating: string; would_return: string };
+};
+
+// Moves a want-to-try bar into the Journal with a rating and a
+// would-you-go-back answer.
+export async function markVisited(
+  id: number,
+  _prev: MarkVisitedState,
+  formData: FormData,
+): Promise<MarkVisitedState> {
+  const user = await requireUser();
+  const values = {
+    rating: String(formData.get("rating") ?? ""),
+    would_return: String(formData.get("would_return") ?? ""),
+  };
+  const fieldErrors = validateVisit(values);
+  if (Object.keys(fieldErrors).length > 0) {
+    return { fieldErrors, values };
+  }
+
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("bars")
+    .update({
+      visit_status: "visited",
+      rating: Number(values.rating),
+      would_return: values.would_return === "yes",
+    })
+    .eq("id", id)
+    .eq("user_id", user.id)
+    .select("id");
+  if (error || data.length === 0) {
+    return { error: SAVE_ERROR, values };
+  }
+  revalidatePath("/", "layout");
+  redirect(`/bars/${id}`);
+}
+
 // Stars or unstars one of your bars. The database only lets you star your
 // own bars, and starring twice is ignored.
 export async function setStarred(barId: number, starred: boolean) {
@@ -132,7 +178,8 @@ export async function setStarred(barId: number, starred: boolean) {
   revalidatePath("/", "layout");
 }
 
-export async function deleteBar(id: number) {
+// After deleting, go back to the list the bar was on.
+export async function deleteBar(id: number, returnTo: "/journal" | "/wishlist") {
   const user = await requireUser();
   const supabase = await createClient();
   const { error } = await supabase
@@ -142,5 +189,5 @@ export async function deleteBar(id: number) {
     .eq("user_id", user.id);
   if (error) throw error;
   revalidatePath("/", "layout");
-  redirect("/journal");
+  redirect(returnTo === "/wishlist" ? "/wishlist" : "/journal");
 }

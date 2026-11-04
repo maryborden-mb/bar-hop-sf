@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { EMPTY_BAR_FORM, type BarFormValues } from "./form-values";
-import { validateBar } from "./validation";
+import { validateBar, validateVisit } from "./validation";
 
 const visitedBar: BarFormValues = {
   ...EMPTY_BAR_FORM,
@@ -65,5 +65,24 @@ describe("validateBar", () => {
     expect(validateBar({ ...visitedBar, type: "Karaoke" }).type).toBe(
       "Please choose a type from the list.",
     );
+  });
+});
+
+describe("validateVisit (marking a want-to-try bar as visited)", () => {
+  it("accepts a rating and an answer", () => {
+    expect(validateVisit({ rating: "4", would_return: "no" })).toEqual({});
+  });
+
+  it("asks for both when neither is given", () => {
+    expect(validateVisit({ rating: "", would_return: "" })).toEqual({
+      rating: "You've been here, so give it a rating from 1 to 5 stars.",
+      would_return: "Would you go back? Choose Yes or No.",
+    });
+  });
+
+  it("rejects a rating outside 1 to 5", () => {
+    expect(validateVisit({ rating: "9", would_return: "yes" })).toEqual({
+      rating: "Ratings go from 1 to 5 stars.",
+    });
   });
 });

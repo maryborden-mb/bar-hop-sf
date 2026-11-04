@@ -3,15 +3,13 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { getBar, parseBarId } from "@/lib/bars";
 import { DeleteBarButton } from "@/app/bars/delete-bar-button";
+import { MarkVisitedForm } from "@/app/bars/mark-visited-form";
 import { StarButton } from "@/app/bars/star-button";
 import { Stars } from "@/app/bars/stars";
 
 export default function BarPage({ params }: PageProps<"/bars/[id]">) {
   return (
     <main className="page">
-      <p>
-        <Link href="/journal">← My journal</Link>
-      </p>
       <Suspense fallback={<p className="muted">Loading…</p>}>
         {params.then(({ id }) => (
           <BarDetail id={id} />
@@ -32,6 +30,13 @@ async function BarDetail({ id }: { id: string }) {
 
   return (
     <article className="stack">
+      <p>
+        {visited ? (
+          <Link href="/journal">← My journal</Link>
+        ) : (
+          <Link href="/wishlist">← Wishlist</Link>
+        )}
+      </p>
       <div className="page-heading">
         <div>
           <h1>{bar.name}</h1>
@@ -84,11 +89,17 @@ async function BarDetail({ id }: { id: string }) {
         )}
       </dl>
 
+      {!visited && <MarkVisitedForm id={bar.id} name={bar.name} />}
+
       <div className="actions">
         <Link href={`/bars/${bar.id}/edit`} className="button">
           Edit
         </Link>
-        <DeleteBarButton id={bar.id} name={bar.name} />
+        <DeleteBarButton
+          id={bar.id}
+          name={bar.name}
+          returnTo={visited ? "/journal" : "/wishlist"}
+        />
       </div>
     </article>
   );

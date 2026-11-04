@@ -2,7 +2,13 @@ import { NextResponse, type NextRequest } from "next/server";
 import { createServerClient } from "@supabase/ssr";
 
 // Pages that need a logged-in user. Add new private pages here.
-const PROTECTED_PATHS = ["/journal", "/bars", "/favorites", "/dashboard"];
+const PROTECTED_PATHS = [
+  "/journal",
+  "/bars",
+  "/favorites",
+  "/wishlist",
+  "/dashboard",
+];
 
 // Runs before every page request: refreshes the Supabase session cookies and
 // sends logged-out visitors on protected pages to /login.

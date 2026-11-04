@@ -1,7 +1,7 @@
 import "server-only";
 import { requireUser } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
-import type { Bar, Neighborhood } from "@/lib/types";
+import type { Bar, Neighborhood, VisitStatus } from "@/lib/types";
 
 export type BarWithNeighborhood = Bar & {
   neighborhood: Neighborhood;
@@ -34,14 +34,21 @@ export async function listNeighborhoods(): Promise<Neighborhood[]> {
   return data;
 }
 
-export async function listBars(): Promise<BarWithNeighborhood[]> {
+// Your bars, newest first. Pass a status to get only visited or only
+// want-to-try bars.
+export async function listBars(
+  status?: VisitStatus,
+): Promise<BarWithNeighborhood[]> {
   const user = await requireUser();
   const supabase = await createClient();
-  const { data, error } = await supabase
+  let query = supabase
     .from("bars")
     .select(BAR_COLUMNS)
-    .eq("user_id", user.id)
-    .order("created_at", { ascending: false });
+    .eq("user_id", user.id);
+  if (status) {
+    query = query.eq("visit_status", status);
+  }
+  const { data, error } = await query.order("created_at", { ascending: false });
   if (error) throw error;
   return (data as BarRow[]).map(toBar);
 }
