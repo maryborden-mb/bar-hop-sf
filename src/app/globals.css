@@ -328,6 +328,96 @@ fieldset.field {
   white-space: nowrap;
 }
 
+/* Dashboard */
+.stat-tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.stat-tile {
+  margin-top: 0;
+  padding: 1rem 1.25rem;
+}
+
+.stat-tile dt {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.stat-tile dd {
+  font-size: 2.25rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--foreground);
+}
+
+.stat-tile .unit {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.stat-note {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.section-title {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--burgundy);
+  margin-bottom: 0.75rem;
+}
+
+.chart {
+  width: 100%;
+}
+
+.chart-tooltip {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+  color: var(--foreground);
+  box-shadow: 0 2px 8px rgb(43 29 29 / 0.08);
+}
+
+.table-view {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.table-view summary {
+  cursor: pointer;
+  color: var(--burgundy);
+}
+
+.table-view table {
+  margin-top: 0.75rem;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-view th,
+.table-view td {
+  text-align: left;
+  padding: 0.35rem 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.table-view td:last-child,
+.table-view th:last-child {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
 /* Bars */
 .bar-list {
   display: flex;
