@@ -6,7 +6,7 @@ A personal journal for San Francisco bars: log where you've been, how you felt a
 
 Hosted on Vercel. Every merge to `main` deploys automatically.
 
-See `PLAN.md` for the full plan.
+See `PLAN.md` for the full plan and `schema.md` for the database tables.
 
 ## Running it locally
 
