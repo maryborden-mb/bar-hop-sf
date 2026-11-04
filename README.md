@@ -18,3 +18,9 @@ You need Node.js 24 and a Supabase project.
    ```
 
 4. Open http://localhost:3000.
+
+## Tests
+
+```bash
+npm test
+```

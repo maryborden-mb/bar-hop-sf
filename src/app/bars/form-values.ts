@@ -17,7 +17,7 @@ export const EMPTY_BAR_FORM: BarFormValues = {
   name: "",
   neighborhood_id: "",
   type: "",
-  visit_status: "visited",
+  visit_status: "",
   rating: "",
   would_return: "",
   has_outdoor_seating: false,

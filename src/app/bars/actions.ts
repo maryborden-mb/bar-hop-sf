@@ -5,16 +5,30 @@ import { redirect } from "next/navigation";
 import { requireUser } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
 import type { BarFormValues } from "./form-values";
+import { validateBar, type BarFieldErrors } from "./validation";
 
 export type BarFormState = {
   error?: string;
+  fieldErrors?: BarFieldErrors;
   // What was typed, so the form keeps it when saving fails.
   values?: BarFormValues;
 };
 
-// Friendlier, field-by-field messages come with the validation feature.
+// Shown when the form looks fine but the database still refuses the save.
 const SAVE_ERROR =
-  "Couldn't save this bar. Please check the form and try again.";
+  "Something went wrong saving this bar. Please try again.";
+
+function checkForm(values: BarFormValues): BarFormState | null {
+  const fieldErrors = validateBar(values);
+  if (Object.keys(fieldErrors).length === 0) {
+    return null;
+  }
+  return {
+    error: "A few things need fixing before this bar can be saved.",
+    fieldErrors,
+    values,
+  };
+}
 
 function readValues(formData: FormData): BarFormValues {
   const text = (key: string) => String(formData.get(key) ?? "").trim();
@@ -55,6 +69,10 @@ export async function createBar(
 ): Promise<BarFormState> {
   const user = await requireUser();
   const values = readValues(formData);
+  const invalid = checkForm(values);
+  if (invalid) {
+    return invalid;
+  }
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("bars")
@@ -75,6 +93,10 @@ export async function updateBar(
 ): Promise<BarFormState> {
   const user = await requireUser();
   const values = readValues(formData);
+  const invalid = checkForm(values);
+  if (invalid) {
+    return invalid;
+  }
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("bars")
